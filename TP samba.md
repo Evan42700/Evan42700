@@ -11,4 +11,4 @@ il faut **désinstaller gnome pour avoir la debian sans interface graphique et l
 avant d'installer samba il faut installer les paquets **apt-get install,apt-get upgrade, apt-get install sudo**
 ![](Images/4.png)
 ![](Images/5.png)
-
+aprés il faut faire sudo apt update puis 
