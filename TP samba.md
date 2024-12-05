@@ -74,3 +74,4 @@ Pour redémarrer le service smbd il faut faire **sudo systemctl restart smbd**
 il faut aller dans l'explorateur de fichier puis cliquer sur les ... et cliquer sur connecter un lecteur réseau aprés 
 dans dossier il faut mettre **\\127.26.104.3\partage** et mettre le nom d'utilisateur et le mot de passe 
 ![](Images/19.png)
+
