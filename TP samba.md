@@ -74,4 +74,17 @@ Pour redémarrer le service smbd il faut faire **sudo systemctl restart smbd**
 il faut aller dans l'explorateur de fichier puis cliquer sur les ... et cliquer sur connecter un lecteur réseau aprés 
 dans dossier il faut mettre **\\172.26.104.3\partage** et mettre le nom d'utilisateur et le mot de passe 
 ![](Images/19.png)
+## Tester les droits que vous avez en tant qu’utilisateur p.nom puis déconnecter le pour vous connecter en tant que professeur.
+on vérifier les groupes de l'utilisateur avec la commande **groups p.nom** et les **droits d'accées avec id p.nom** et on vérifie les droits d'accées à un fichier
+avec la commande **ls -l /srv/parage** , on peut voir qu'on à les **droits de lecture et d'écriture et d'éxecution.**
+![](Images/20.png)
+![](Images/21.png)
 
+## Créer un nouveau partage nommé Travaux Pratique auquel seul l’utilisateurrofesseur à le droit d'écriture et de lecture et les autres ont qu’un droit de lecture sur ce partage.
+
+Pour cela il faut créer le dossier pour le partage avec la commande **mkdir TravauxPratique**
+et aprés il faut configurer les permissions du dossier 
+il faut changer le propriétaire du dossier pour professeur avec la commande **chown professeur:professeur TravauxPratique**
+ les permissions pour que seul l'utilisateur professeur puisse écrire dans le dossier, tandis que les autres peuvent seulement lire
+ avec **chmod 755 TravauxPratique**
+ ![](Images/22.png)
