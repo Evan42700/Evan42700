@@ -88,3 +88,61 @@ il faut changer le propriétaire du dossier pour professeur avec la commande **c
  les permissions pour que seul l'utilisateur professeur puisse écrire dans le dossier, tandis que les autres peuvent seulement lire
  avec **chmod 755 TravauxPratique**
  ![](Images/22.png)
+
+ ## TP Samba
+
+ 1.On clique avec le bouton droit sur la machine virtuelle Samba et on selectionne modifier les paramétres 
+ puis on clique sur ajouter un nouveau périphérique et on selectionne disque dur .
+
+ 2.la commande fdisk -l vous pouvez voir les disques branchés sur la
+machine. il faire su pour avoir les droits puis /sbin/fdisk -l 
+
+![](Images/23.png)
+
+3. la commande **gdisk n'est pas installer** pour cela ont fait **sudo apt install gdisk**
+4. on fait d'abord gdisk /dev/sdb
+● o pour créer une nouvelle table de partition GPT puis sur Entrée (confirmer
+avec Y et Entrée)
+● n pour créer une nouvelle partition. Pour le numéro de partition, laissez par
+défaut.
+● Pour le choix du First Sector, laissez le choix par défaut.
+● Idem pour le last sector, laissez par défaut.
+● Pour le code de la partition, entrez fd00 cela correspond à Linux RAID
+● Appuyez sur w pour enregistrer les changements et quitter gdisk (confirmer
+avec Y et Entrée)
+![](Images/24.png)
+ensuite on fait pareil pour sdc , sdd et sde
+4. pour installer le paquet mdadm , il faut faire sudo apt install mdadm
+5. pour vérifier que tout est bon via mdadm l'outil de gestion du RAID : mdadm -E
+/dev/sd[b-e]
+6. On va maintenant demander à mdadm de créer une grappe en lui précisant plusieurs
+paramètres :
+● /dev/mdX : correspondant au nom de la grappe
+● --level=Y : indique que je souhaite créer un RAID Y
+● --raid-devices=Z : indique le nombre de disques qui vont composer mon
+RAID
+● et ensuite on indique le nom des disques
+Faire la commande suivante pour créer une grappe RAID 5 :
+mdadm --create /dev/md0 --level=5 --raid-devices=4 /dev/sd[b-e]1
+7. On peut contrôler l'avancement de la création de la grappe RAID avec la commande
+suivante : cat /proc/mdstat
+![](Images/25.png)
+8.On va pouvoir créer un système de fichiers de types ext4 sur notre RAID :
+mkfs.ext4 /dev/md0
+
+9.Monter votre RAID sur le répertoire /mnt/monraid :
+● mkdir /mnt/monraid
+● mount /dev/md0 /mnt/monraid/
+
+10. sudo nano /etc/fstab puis /dev/md0 /mnt/monraid ext4 defaults 0 0
+11. exécuter ces trois commandes :
+● cp /etc/mdadm/mdadm.conf /etc/mdadm/mdadm.conf.old
+● mdadm --examine --scan --verbose >> /etc/mdadm/mdadm.conf
+● update-initramfs -u -k all
+
+13) Vérifier l’état des disques du RAID : mdadm --detail /dev/md0
+14) pour supprimer un disque on fait clique droit sur la vm , modifier les paramétres
+ et on supprime le dique que l'on veut .
+15) 
+
+
