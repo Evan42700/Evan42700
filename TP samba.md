@@ -143,6 +143,9 @@ mkfs.ext4 /dev/md0
 13) Vérifier l’état des disques du RAID : mdadm --detail /dev/md0
 14) pour supprimer un disque on fait clique droit sur la vm , modifier les paramétres
  et on supprime le dique que l'on veut .
-15) 
+15) Vérifier l’état des disques du RAID : mdadm --detail /dev/md0
+17. Rajouter un nouveau disque de 1Go sur votre machine. regarder quel est son nom :
+sudo sfdisk -s
+
 
 
